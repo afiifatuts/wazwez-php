@@ -1,0 +1,190 @@
+body {
+  padding: 48px;
+}
+header {
+  padding-left:10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+header .logo-brand {
+  height: 28px;
+  width: 125px;
+}
+
+header nav {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+nav .icon-notification {
+  width: 24px;
+  height: 24px;
+  background-color: #9E9E9E;
+  cursor: pointer;
+}
+
+
+nav .user-profile {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.user-profile .user-avatar {
+  width: 24px;
+  height: 24px;
+  background-color: cyan;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.user-profile .user-name {
+  flex: 1;
+}
+.user-profile .user-arrow {
+  margin-left: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+main .item {
+  width: 100px;
+  height: 100px;
+  background-color: #9E9E9E;
+}
+
+@media only screen and (max-width: 414px) {
+  header .logo-brand {
+    height: 20px;
+    width: 100px;
+  }
+
+  .user-profile .user-name {
+    display: none;
+  }
+  .user-profile .user-arrow {
+    display: none;
+  }
+  body {
+    padding: 12px;
+  }
+}
+
+main {
+  padding : 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+main #container {
+  background: white;	
+  border-radius :10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  flex: 1;
+  max-width: 800px;
+  height: 400px;
+}
+
+main nav {
+  padding :10px;
+  display: flex;
+  flex-direction: column;
+}
+
+nav .mytask{
+  flex:1;
+  font-family : Poppins;
+  color: #FF5F26;
+}
+
+.todolist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 5px;
+  gap: 100px;
+}
+
+.short-by{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 5px;
+  gap: 100px;
+}
+
+nav .shortby{
+  font-family :poppins;
+  font-size:24px;
+}
+.hidden{
+  display: none;
+}
+/* form input tugas*/
+.new-data{
+  background-color: #F5F5F5;
+  width: 90%;
+  margin-left: 50px;
+}
+.input-form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 12px 20px;
+  display: inline-block;
+  background-color: #F5F5F5;
+  border-color: no-border
+}
+.radio-list-task-new{
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+/* end of form input*/
+.button-add{
+  width: 100px;
+  font-family :poppins;
+  text-align:center;
+  font-size:15px;
+  cursor:pointer;
+  background-color: #FF5F26;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.button-add:active{
+  background-color: red;
+}
+.list-task{
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.list-container{
+  background-color: grey;
+  list-style-type: none;
+}
+
+.radio-list-task{
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
