@@ -43,7 +43,7 @@
               To do List <br />
               Buat list tugas saya
             </div>
-            <button class="button-add" onmouseenter="hoverButton()" onclick="addTask()">
+            <button class="button-add" onclick="addTask()">
               Tambah Tugas
             </button>
           </div>
@@ -58,7 +58,7 @@
           <div id="new-data-form" class="new-data hidden">
             <input class="input-form" id="name" oninput="handleChange(this)" placeholder="Masukkan nama tugas"/>
             <input class="input-form" id="desc" oninput="handleChange(this)" placeholder="Deskripsi tugas(Optional)"/>
-            <input class="input-form" id="date" oninput="handleChange(this)" placeholder="Tanggal input"/>
+            <input class="input-form" type="datetime-local" min="2022-08-01" id="date" oninput="handleChange(this)" placeholder="Tanggal input"/>
           </div>
           <div class="list-task">
             <ul id="list-container" class="list-container">
@@ -74,6 +74,7 @@
       </div>
     </main>
   </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script>
     function addTask() {
       document.getElementById("new-data-form").classList.remove("hidden");
@@ -87,39 +88,60 @@
       }
     }
 
-    document.addEventListener("keypress", function (e) {
-      const addFromClasslist =
-        document.getElementById("new-data-form").classList;
-      if (addFromClasslist.contains("hidden") === false) {
-        if (e.key === "Enter") {
-          const task = {
-            name: document.getElementById("name").value,
-            desc: document.getElementById("desc").value,
-            date: document.getElementById("date").value,
-          };
-          if (task?.name) {
-            handleEnter(task);
-            document.getElementById("name").value = "";
-            document.getElementById("desc").value = "";
-            document.getElementById("date").value = "";
-          } else {
-            alert("name wajib diisi");
-          }
+    document.addEventListener('keypress', async function(e) {
+    const addFormClasslist = document.getElementById("new-data-form").classList
+    if (addFormClasslist.contains("hidden") === false) {
+      if (e.key === 'Enter') {
+        const task = {
+          name: document.getElementById("name").value,
+          desc: document.getElementById("desc").value,
+          date: document.getElementById("date").value
         }
+
+        if (task?.name) {
+          jQuery.ajax({
+            type: "POST",
+            url: '/wazwez-php/insert.php',
+            dataType: 'json',
+            data: {
+              functionname: 'insertTask',
+              arguments: [task.name]
+            },
+
+            success: function(obj, textstatus) {
+              if (String(obj?.result).includes("Error")) {
+                alert(obj.result);
+              } else if (obj?.error) {
+                alert(obj.error);
+              } else {
+                alert("success");
+                handleEnter(task)
+                document.getElementById("name").value = ""
+                document.getElementById("desc").value = ""
+                document.getElementById("date").value = ""
+              }
+            },
+          });
+        } else {
+          alert("name wajib diisi")
+        }
+
+
+
       }
-    });
+    }
+  });
 
     function handleDone(params){
       console.log(params)
       params.style =" text-decoration: line-through;"
     }
 
-    function handleEnter(task){
-      document.getElementById("new-data-form").classList.add("hidden");
-      let listContainer =document.getElementById("list-container");
-      listContainer.insertAdjacentHTML("afterbegin",'<li class="list-item">${task.name}</li>');
-      listContainer.insertAdjacentHTML("afterend",'<div class="accordion" onclick="handleShowSubtask(this)"> <div class="task">${task.name} - ${task.date}</div> <div class="subtask hidden"> ini subtask</div> </div>');
-    }
+    function handleEnter(task) {
+    document.getElementById("new-data-form").classList.add("hidden");
+    let listContainer = document.getElementById("list-container");
+    listContainer.insertAdjacentHTML("afterbegin", `<li onclick="handleDone(this)" class="list-item">${task.name}</li>`,`<li onclick="handleDone(this)" class="list-item">${task.desc}</li>`);
+  }
 
     function handleChange(params){
       console.log(params.value);
