@@ -31,3 +31,24 @@ c = a;
 a =b;
 b =c;
 console.log(a)
+console.log(b)
+
+// task 3
+let word = "P R O G R A M M E R";
+const myArray = text.split(" ");
+
+function pattern(n){
+    for (i=0; i<n; i++){
+        for (j=0; j<n; j++){
+            if(i==j || i==n -1-j){
+            console.log(myArray)
+        } else{
+            console.log("=")
+        }
+        
+        }
+        console.log("mm")
+    }
+}
+
+pattern(10)
